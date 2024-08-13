@@ -1,29 +1,51 @@
 CREATE TABLE musicla;
 
-CREATE TABLE producto(
-			PID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-            Producto varchar(40),
-            Categoria varchar(50),
-            Stock INT,
-            Valor INT
-             );
-            
-CREATE TABLE clientes(
-			usuario varchar(50),
-            provincia varchar(20),
-            ciudad varchar(50),
-            localidad varchar(50),
-            CP INT,
-            Primary Key (usuario)
-            );
-            
-CREATE TABLE compras(
-			CID INT NOT NULL auto_increment,
-            Tipo_Envio varchar(50),
-            Modo_pago varchar(20),
-            Moneda varchar(20),
-            Primary Key (CID),
-			Usuario varchar(50),  
-            PID INT NOT NULL,
-            FOREIGN KEY (USUARIO) REFERENCES clientes(Usuario),
-            FOREIGN KEY (PID) REFERENCES Producto(PID));
+CREATE TABLE ubicacion(
+ID_ubi varchar(7) primary key,
+provincia varchar(15),
+localidad varchar(20),
+cod_postal int
+);
+
+CREATE TABLE proveedores(
+ID_provd int primary key auto_increment,
+nombre varchar(40),
+domicilio varchar(60),
+ID_ubi varchar(7),
+FOREIGN KEY (ID_ubi) REFERENCES ubicacion(ID_ubi)
+);
+
+CREATE TABLE articulo(
+ID_prod int primary key auto_increment,
+nombre varchar (50), 
+marca varchar(50),
+modelo varchar(50),
+año int, 
+tipo varchar(50),
+estado varchar(15),
+precio int,
+proveedor int,
+FOREIGN KEY (proveedor) REFERENCES proveedores(ID_provd)
+);
+
+CREATE TABLE cliente(
+usuario varchar(40) primary key,
+nombre varchar(40),
+apellido varchar(40),
+banda varchar(40),
+instrumento varchar(20),
+domicilio varchar(60),
+ID_ubi varchar(7),
+FOREIGN KEY (ID_ubi) REFERENCES ubicacion(ID_ubi)
+);
+
+CREATE TABLE pedidos(
+cod_compra int primary key auto_increment,
+producto int,
+cliente varchar(40),
+tipo_entrega varchar(40),
+modo_de_pago varchar(40),
+estado_de_compra varchar(40),
+FOREIGN KEY (producto) REFERENCES articulo(ID_prod),
+FOREIGN KEY (cliente) REFERENCES cliente(usuario)
+);

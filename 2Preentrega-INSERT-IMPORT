@@ -1,10 +1,20 @@
 -- INSERT DE DATOS
+
+INSERT INTO ubicacion VALUES 
+('BA_ma', 'Buenos Aires','Martinez', 1640),
+('SF_sf', 'Santa Fe','Santa Fe', 3000),
+('SF_ro', 'Santa Fe','Rosario', 2000),
+('CABA_sn', 'CABA','San Nicolas', 1004),
+('CABA_pa', 'CABA','Palermo', 1414),
+('CB_co', 'Cordoba','Cordoba', 5000)
+;
+
 -- IMPORT DE cliente.sql
 -- Script de SQL via SERVER → DATA IMPORT
 -- Datos creados via MOOKARRO. 
 -- En el caso que llegase a tirar error de importacion aplicar las siguientes sentencias.
 
--- Si importa sin problemas, saltar a la linea 15 
+-- Si importa sin problemas, saltar a la linea 25 
 
 -- DESBLOQUEAR RESTRICCIONES DE FK, TRUNCAR TABLA Y ACTIVAR LAS FK DE CLIENTES. 
 SET FOREIGN_KEY_CHECKS = 0;

@@ -1,0 +1,122 @@
+-- VIEWS
+
+-- View que devuelve tabla con los pagos pendientes superiores a los 100k
+CREATE OR REPLACE VIEW V_pendiente_millon AS
+(SELECT c.nombre, c.apellido, a.precio, p.cliente, p.estado_de_compra  
+FROM pedidos AS p
+JOIN articulo AS a ON a.ID_prod = p.producto
+JOIN cliente as c ON c.usuario = p.cliente
+WHERE estado_de_compra = "A pagar" and a.precio > 1000000
+ORDER BY a.precio DESC);
+
+SELECT * FROM (V_pendiente_millon);
+
+-- VIEW que devuelve tabla con los proveedores de guitarras. 
+CREATE OR REPLACE VIEW V_proveedores_guitarras AS
+(SELECT a.marca, a.modelo, a.precio, p.nombre, u.ID_ubi
+FROM proveedores AS P
+JOIN articulo AS a ON a.proveedor = p.id_provd
+JOIN ubicacion AS u ON u.ID_ubi = p.ID_ubi
+WHERE a.tipo = "guitarra"
+);
+
+SELECT * FROM (V_proveedores_guitarras);
+
+-- FUNCIONES
+
+-- Funcion que retorna el descuento en pesos que debe hacerse al articulo en venta. 
+-- Se invoca con los parametros de ID del producto y el porcentaje que desea aplicarse. 
+DELIMITER ||
+CREATE FUNCTION descuento (id int, porcentaje INT) RETURNS INT
+DETERMINISTIC
+BEGIN
+DECLARE instrumento INT; 
+DECLARE resultado INT ;
+SET instrumento = (SELECT precio FROM articulo WHERE id_prod = id limit 1);
+SET resultado = (instrumento / porcentaje);
+RETURN resultado;
+END||
+DELIMITER ;
+
+SELECT marca, modelo, precio, descuento (7,5) FROM articulo  WHERE id_prod = 7;
+
+-- FUNCION que retorna el recuento de instrumentos entre dos años de modelo. 
+DELIMITER ||
+CREATE FUNCTION Instrumentos (T1 INT, T2 INT) RETURNS INT
+DETERMINISTIC
+BEGIN
+DECLARE resultado INT;
+SET resultado = (SELECT count(modelo) FROM articulo WHERE año  BETWEEN T1 AND T2);
+RETURN resultado;
+END||
+DELIMITER ;
+
+SELECT  instrumentos (2000,2010);
+
+-- PREOCEDIMIENTOS ALMACENADOS
+
+-- SP SIMPLE que devuelve recuento de articulos superior a los 800k
+DELIMITER ||
+CREATE PROCEDURE cantidad_articulos800k()
+BEGIN 
+	SELECT COUNT(id_prod) FROM articulo WHERE precio >= 800000;
+END||
+DELIMITER ;
+
+CALL cantidad_articulos800k();
+
+
+-- SP DE ENTRADA que devuelve un resumen de los pedidos por tipo de articulo (bateria, guitarra, etc)
+-- Se invoca colocando el parametro del instrumento del cual se desea saber el resumen. 
+DELIMITER ||
+CREATE PROCEDURE pedidos_instrumento(in palabra varchar (15))
+BEGIN 
+	SELECT p.cod_compra, p.producto, c.nombre, c.apellido, c.instrumento, a.marca, a.tipo
+    FROM pedidos p 
+    JOIN cliente c ON c.usuario = p.cliente
+    JOIN articulo a  ON p.producto = a.id_prod 
+    WHERE a.tipo = palabra;
+END||
+DELIMITER ;
+
+CALL pedidos_instrumento('redoblante');
+DROP procedure pedidos_instrumento;
+
+-- SP DE ENTRADA Y SALIDA que informa el pago total de los pedidos de un mismo usuario
+DELIMITER ||
+CREATE PROCEDURE PagoXUsuario (IN usuario varchar(12), OUT suma INT)
+BEGIN
+SELECT SUM(precio) INTO suma FROM articulo a 
+JOIN pedidos p ON p.producto = a.id_prod 
+WHERE p.cliente = usuario;
+END||
+DELIMITER ;
+
+CALL pagoxusuario ('crookledge2',@suma );
+SELECT @suma;
+
+-- TRIGGER
+-- TRIGGER que guarda en bitacora  el ID del articulo y su antiguo valor al actualizar el precio. 
+-- Crear tabla
+CREATE TABLE precios_anteriores (
+id_prod INT PRIMARY KEY,
+precio_anterior INT,
+fecha DATETIME
+);
+
+DELIMITER ||
+CREATE TRIGGER precios_upd 
+BEFORE UPDATE ON articulo
+FOR EACH ROW
+BEGIN
+INSERT INTO precios_anteriores(id_prod, precio_anterior, fecha) 
+	VALUES ( old.id_prod, old.precio, NOW());
+END ||
+DELIMITER ;  
+
+  
+UPDATE articulo SET  precio = 60000 WHERE id_prod = 5;
+
+SELECT id_prod, precio FROM articulo;
+SELECT * FROM precios_anteriores;
+

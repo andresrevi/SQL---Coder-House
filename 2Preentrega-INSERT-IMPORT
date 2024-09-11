@@ -1,4 +1,4 @@
--- INSERT DE DATOS
+-- INSERT'S
 
 INSERT INTO ubicacion VALUES 
 ('BA_ma', 'Buenos Aires','Martinez', 1640),
@@ -6,99 +6,108 @@ INSERT INTO ubicacion VALUES
 ('SF_ro', 'Santa Fe','Rosario', 2000),
 ('CABA_sn', 'CABA','San Nicolas', 1004),
 ('CABA_pa', 'CABA','Palermo', 1414),
-('CB_co', 'Cordoba','Cordoba', 5000)
+('CB_co', 'Cordoba','Cordoba', 5000),
+('BA_cnsz', 'Buenos Aires','Coronel Suarez', 7540),
+('BA_ln', 'Buenos Aires','Lanus', 1824),
+('ER_pna', 'Entre Rios','Parana', 3100),
+('MZA_mza', 'Mendoza','Mendoza', 5500),
+('SF_rfa', 'Santa Fe','Rafaela', 2300),
+('SF_stm', 'Santa Fe','Santo Tome', 3016)
 ;
-
--- IMPORT DE cliente.sql
--- Script de SQL via SERVER → DATA IMPORT
--- Datos creados via MOOKARRO. 
--- En el caso que llegase a tirar error de importacion aplicar las siguientes sentencias.
-
--- Si importa sin problemas, saltar a la linea 25 
-
--- DESBLOQUEAR RESTRICCIONES DE FK, TRUNCAR TABLA Y ACTIVAR LAS FK DE CLIENTES. 
-SET FOREIGN_KEY_CHECKS = 0;
-TRUNCATE TABLE cliente;
--- importar datos y aplicar el Foreing nuevamente
-SET FOREIGN_KEY_CHECKS = 1;
-
--- INSERT el restante de datos de CLIENTE
+-- IMPORT cliente.sql
 
 UPDATE cliente
-SET instrumento = 'Vocalista', domicilio= 'Hernandarias 3042'
+SET instrumento = 'Vocalista', 
+domicilio= 'Hernandarias 3042',
+ID_ubi = "SF_sf"
 WHERE usuario = 'agrocock0';
 
 UPDATE cliente
-SET instrumento = 'Bajista', domicilio= 'Bartolome Mitre 2115'
+SET instrumento = 'Bajista', 
+domicilio= 'Bartolome Mitre 2115',
+ID_ubi = "BA_cnsz"
 WHERE usuario = 'araspison9';
 
 UPDATE cliente
-SET instrumento = 'Tecladista', domicilio= 'Av. Ntra Sra del Rosario 2739'
+SET instrumento = 'Tecladista', 
+domicilio= 'Av. Ntra Sra del Rosario 2739',
+ID_ubi = "SF_ro"
 WHERE usuario = 'bcrabbe5';
 
 UPDATE cliente
-SET instrumento = 'Bajista', domicilio= 'Ignacio Risso 1745'
+SET instrumento = 'Bajista', 
+domicilio= 'Ignacio Risso 1745',
+ID_ubi = "SF_sf"
 WHERE usuario = 'crookledge2';
 
 UPDATE cliente
-SET instrumento = 'Baterista', domicilio= 'Domingo Purita 1406'
+SET instrumento = 'Baterista', 
+domicilio= 'Domingo Purita 1406',
+ID_ubi = "BA_ln"
 WHERE usuario = 'dpaye8';
 
 UPDATE cliente
-SET instrumento = 'Baterista', domicilio= 'República Dominicana 422'
+SET instrumento = 'Baterista', 
+domicilio= 'República Dominicana 422',
+ID_ubi = "ER_pna"
 WHERE usuario = 'gjoriot3';
 
 UPDATE cliente
-SET instrumento = 'Baterista', domicilio= 'Malabia 213'
+SET instrumento = 'Baterista', 
+domicilio= 'Malabia 213',
+ID_ubi = "MZA_mza"
 WHERE usuario = 'kfidian6';
 
 UPDATE cliente
-SET instrumento = 'Guitarrista', domicilio= 'Falucho 134'
+SET instrumento = 'Guitarrista', 
+domicilio= 'Falucho 134',
+ID_ubi = "SF_rfa"
 WHERE usuario = 'lserver1';
 
 UPDATE cliente
-SET instrumento = 'Tecladista', domicilio= 'Av. Lujan 3942'
+SET instrumento = 'Tecladista', 
+domicilio= 'Av. Lujan 3942',
+ID_ubi = "SF_stm"
 WHERE usuario = 'ndeyenhardt7';
 
 UPDATE cliente
-SET instrumento = 'Guitarrista', domicilio= 'Gdor. Tarragona 620'
+SET instrumento = 'Guitarrista', 
+domicilio= 'Gdor. Tarragona 620',
+ID_ubi = "SF_stm"
 WHERE usuario = 'tbratchell4';
 
--- INSERT tabla PROVEEDORES
-INSERT INTO proveedores (ID_provd, nombre, domicilio) VALUES 
-(DEFAULT,"Famusic", "Avenida Santa Fe 2899"), 
-(DEFAULT,"Domene", "9 de Julio 3098") ,  
-(DEFAULT,"Audio Rosario", "Rioja 1302"), 
-(DEFAULT,"AudioImport", "Fryda Schultz de Mantovani 1550"), 
-(DEFAULT,"PC Studio", "Mendoza 2793" ), 
-(DEFAULT,"Bairesrocks", "San Martin 473" ),
-(DEFAULT,"Black Music", "Cnel. Niceto Vega 5647"), 
-(DEFAULT,"Olmos Music Cordoba", "Av. Emilio Olmos 201"), 
-(DEFAULT,"Templo del Rock","Av. Emilio Olmos 175"); 
+INSERT INTO proveedores (ID_provd, nombre, domicilio, ID_ubi) VALUES 
+(DEFAULT,"Famusic", "Avenida Santa Fe 2899", "BA_ma"), 
+(DEFAULT,"Domene", "9 de Julio 3098", "SF_sf") ,  
+(DEFAULT,"Audio Rosario", "Rioja 1302", "SF_ro"), 
+(DEFAULT,"AudioImport", "Fryda Schultz de Mantovani 1550", "SF_sf"), 
+(DEFAULT,"PC Studio", "Mendoza 2793", "SF_sf" ), 
+(DEFAULT,"Bairesrocks", "San Martin 473", "CABA_pa"),
+(DEFAULT,"Black Music", "Cnel. Niceto Vega 5647", "CABA_sn"), 
+(DEFAULT,"Olmos Music Cordoba", "Av. Emilio Olmos 201", "CB_co"), 
+(DEFAULT,"Templo del Rock","Av. Emilio Olmos 175", "CB_co"); 
 
--- INSERT tabla ARTICULO
 INSERT INTO articulo VALUES 
-(DEFAULT, 'Instanbul', 'Mehmet', 2006, 'Platillo', 'Nuevo', 565000, NULL),
-(DEFAULT, 'Yamaha', 'Custom', 2014, 'Redoblante', 'Nuevo', 1174500, NULL),
-(DEFAULT, 'Zidjian', 'Avedis', 2010, 'Platillo', 'Nuevo', 740000, NULL),
-(DEFAULT, 'Fender', 'Stratocaster', 2010, 'Guitarra', 'Nuevo', 3197918, NULL),
-(DEFAULT, 'Fender', 'Telecaster', 2006, 'Guitarra', 'Nuevo', 565000, NULL),
-(DEFAULT, 'Epiphone', 'Les Paul', 1873, 'Guitarra', 'Usado', 1500000, NULL),
-(DEFAULT, 'Gibson', 'SG', 2011, 'Guitarra', 'Usado', 2688000, NULL),
-(DEFAULT, 'Yamaha', 'PSR', 2015, 'Teclado', 'Nuevo', 565000, NULL),
-(DEFAULT, 'Zidjian', 'K', 2023, 'Platillo', 'Nuevo', 769000, NULL),
-(DEFAULT, 'Meinl', 'Byzance', 2015, 'Platillo', 'Usado', 205000, NULL),
-(DEFAULT, 'Gretsch', 'Range', 2018, 'Redoblante', 'Usado', 790000, NULL),
-(DEFAULT, 'Ibanez', 'GSR205', 2018, 'Bajo', 'Nuevo', 713000, NULL),
-(DEFAULT, 'Ibanez', 'GSR200', 2006, 'Bajo', 'Nuevo', 777400, NULL),
-(DEFAULT, 'Yamaha', 'TRBX 304', 2020, 'Bajo', 'Nuevo', 1079767, NULL),
-(DEFAULT, 'Samson', 'MK10', 2019, 'Soporte', 'Nuevo', 46499, NULL),
-(DEFAULT, 'Yamaha', 'PSR', 2008, 'Teclado', 'Usado', 505000, NULL),
-(DEFAULT, 'Korg', 'Pa4x', 2019, 'Teclado', 'Usado', 8613696, NULL),
-(DEFAULT, 'Korg', 'Pa300', 2017, 'Teclado', 'Usado', 1500000, NULL),
-(DEFAULT, 'Tama', 'Starclassic', 2020, 'Bateria', 'Nuevo', 6612212, NULL),
-(DEFAULT, 'Pearl', 'Master', 2021, 'Bateria', 'Nuevo', 5338246, NULL),
-(DEFAULT, 'Parquer', 'Travel', 2015, 'Bateria', 'Usada', 500000, NULL);
+(DEFAULT, 'Instanbul', 'Mehmet', 2006, 'Platillo', 'Nuevo', 565000, 1),
+(DEFAULT, 'Yamaha', 'Custom', 2014, 'Redoblante', 'Nuevo', 1174500, 4),
+(DEFAULT, 'Zidjian', 'Avedis', 2010, 'Platillo', 'Nuevo', 740000, 7),
+(DEFAULT, 'Fender', 'Stratocaster', 2010, 'Guitarra', 'Nuevo', 3197918, 8),
+(DEFAULT, 'Fender', 'Telecaster', 2006, 'Guitarra', 'Nuevo', 565000, 9),
+(DEFAULT, 'Epiphone', 'Les Paul', 1873, 'Guitarra', 'Usado', 1500000, 2),
+(DEFAULT, 'Gibson', 'SG', 2011, 'Guitarra', 'Usado', 2688000, 3),
+(DEFAULT, 'Yamaha', 'PSR', 2015, 'Teclado', 'Nuevo', 565000, 6),
+(DEFAULT, 'Zidjian', 'K', 2023, 'Platillo', 'Nuevo', 769000, 5),
+(DEFAULT, 'Meinl', 'Byzance', 2015, 'Platillo', 'Usado', 205000, 2),
+(DEFAULT, 'Gretsch', 'Range', 2018, 'Redoblante', 'Usado', 790000, 7),
+(DEFAULT, 'Ibanez', 'GSR205', 2018, 'Bajo', 'Nuevo', 713000, 8),
+(DEFAULT, 'Ibanez', 'GSR200', 2006, 'Bajo', 'Nuevo', 777400, 8),
+(DEFAULT, 'Yamaha', 'TRBX 304', 2020, 'Bajo', 'Nuevo', 1079767, 4),
+(DEFAULT, 'Samson', 'MK10', 2019, 'Soporte', 'Nuevo', 46499, 4),
+(DEFAULT, 'Yamaha', 'PSR', 2008, 'Teclado', 'Usado', 505000, 7),
+(DEFAULT, 'Korg', 'Pa4x', 2019, 'Teclado', 'Usado', 8613696, 2),
+(DEFAULT, 'Korg', 'Pa300', 2017, 'Teclado', 'Usado', 1500000, 7),
+(DEFAULT, 'Tama', 'Starclassic', 2020, 'Bateria', 'Nuevo', 6612212, 7),
+(DEFAULT, 'Pearl', 'Master', 2021, 'Bateria', 'Nuevo', 5338246, 2),
+(DEFAULT, 'Parquer', 'Travel', 2015, 'Bateria', 'Usada', 500000, 2);
 
--- IMPORT DE pedidos.sql.
--- Script de SQL via SERVER → DATA IMPORT
+# import PEDIDOS#

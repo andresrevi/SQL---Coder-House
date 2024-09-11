@@ -14,7 +14,7 @@ INSERT INTO ubicacion VALUES
 ('SF_rfa', 'Santa Fe','Rafaela', 2300),
 ('SF_stm', 'Santa Fe','Santo Tome', 3016)
 ;
--- IMPORT cliente.sql
+-- IMPORTANTE → IMPORT cliente.sql
 
 UPDATE cliente
 SET instrumento = 'Vocalista', 
@@ -110,4 +110,4 @@ INSERT INTO articulo VALUES
 (DEFAULT, 'Pearl', 'Master', 2021, 'Bateria', 'Nuevo', 5338246, 2),
 (DEFAULT, 'Parquer', 'Travel', 2015, 'Bateria', 'Usada', 500000, 2);
 
-# import PEDIDOS#
+-- IMPORTANTE → IMPORT pedidos.sql

@@ -1,5 +1,7 @@
 CREATE DATABASE MUSICLA;
 
+USE DATABASE MUSICLA;
+
 CREATE TABLE ubicacion(
 ID_ubi varchar(7) primary key,
 provincia varchar(15),

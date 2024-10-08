@@ -81,7 +81,6 @@ END||
 DELIMITER ;
 
 CALL SP_pedidos_instrumento('redoblante');
-DROP procedure SP_pedidos_instrumento;
 
 -- SP DE ENTRADA Y SALIDA que informa el pago total de los pedidos de un mismo usuario
 DELIMITER ||

@@ -1,0 +1,83 @@
+CREATE DATABASE MUSICLA;
+
+CREATE TABLE ubicacion(
+ID_ubi varchar(7) primary key,
+provincia varchar(15),
+localidad varchar(20),
+cod_post int
+);
+
+CREATE TABLE proveedores(
+ID_provd int primary key auto_increment,
+nombre varchar(40),
+domicilio varchar(60),
+ID_ubi varchar(7),
+FOREIGN KEY (ID_ubi) REFERENCES ubicacion(ID_ubi)
+);
+
+CREATE TABLE delivery(
+id_flete INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+comercio varchar(40),
+telefono varchar(15),
+vehiculo varchar(30),
+localidad varchar(10),
+FOREIGN KEY (localidad) REFERENCES ubicacion(ID_ubi)
+);
+
+CREATE TABLE empresa_correo(
+id_empresa INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+nombre varchar(40),
+correo varchar(40),
+web varchar(40),
+localidad varchar(40),
+FOREIGN KEY (localidad) REFERENCES ubicacion(ID_ubi)
+);
+
+CREATE TABLE empleado(
+id_empleado INT PRIMARY KEY AUTO_INCREMENT NOT NULL, 
+nombre varchar(40),
+apellido varchar(40),
+sexo varchar(40),
+turno varchar(40),
+telefono varchar(40)
+);
+
+CREATE TABLE articulo(
+ID_prod int primary key auto_increment,
+marca varchar(50),
+modelo varchar(50),
+año int, 
+tipo varchar(50),
+estado varchar(15),
+precio int,
+proveedor int,
+FOREIGN KEY (proveedor) REFERENCES proveedores(ID_provd)
+);
+
+CREATE TABLE cliente(
+usuario varchar(40) primary key,
+nombre varchar(40),
+apellido varchar(40),
+banda varchar(150),
+instrumento varchar(20),
+domicilio varchar(60),
+ID_ubi varchar(7),
+FOREIGN KEY (ID_ubi) REFERENCES ubicacion(ID_ubi)
+);
+
+CREATE TABLE pedidos(
+cod_compra int primary key auto_increment,
+producto int,
+cliente varchar(40),
+tipo_entrega varchar(40),
+modo_pago varchar(40), #cambiar a tipo_pago#,
+estado_compra varchar(40), #CAMBIAR A estado_compra#
+delivery INT, 
+empresa_correo INT, 
+empleado INT,
+FOREIGN KEY (delivery) REFERENCES delivery(id_flete),
+FOREIGN KEY (empleado) REFERENCES empleado(id_empleado),
+FOREIGN KEY (empresa_correo) REFERENCES empresa_correo(id_empresa),
+FOREIGN KEY (producto) REFERENCES articulo(ID_prod),
+FOREIGN KEY (cliente) REFERENCES cliente(usuario)
+);

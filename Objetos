@@ -1,0 +1,170 @@
+PASO 3: Creacion de Objetos
+-- a ) VIEWS
+
+-- VIEW que devuelve tabla virtual con los pagos pendientes superiores a los 100k
+CREATE OR REPLACE VIEW V_pendiente_millon AS
+(SELECT c.nombre, c.apellido, a.precio, p.cliente, p.estado_compra  
+FROM pedidos AS p
+JOIN articulo AS a ON a.ID_prod = p.producto
+JOIN cliente as c ON c.usuario = p.cliente
+WHERE estado_compra = "A pagar" and a.precio > 1000000
+ORDER BY a.precio DESC);
+
+SELECT * FROM (V_pendiente_millon);
+
+-- VIEW que devuelve tabla virtual con los proveedores de guitarras. 
+CREATE OR REPLACE VIEW V_proveedores_guitarras AS
+(SELECT a.marca, a.modelo, a.precio, p.nombre, u.ID_ubi
+FROM proveedores AS P
+JOIN articulo AS a ON a.proveedor = p.id_provd
+JOIN ubicacion AS u ON u.ID_ubi = p.ID_ubi
+WHERE a.tipo = "guitarra"
+);
+
+SELECT * FROM (V_proveedores_guitarras);
+
+
+-- b) FUNCIONES
+
+-- Funcion que retorna el descuento en pesos que debe hacerse al articulo en venta. 
+-- Se invoca con los parametros de ID del producto y el porcentaje que desea aplicarse. 
+DELIMITER ||
+CREATE FUNCTION F_descuento (id int, porcentaje INT) RETURNS INT
+DETERMINISTIC
+BEGIN
+DECLARE instrumento INT; 
+DECLARE resultado INT ;
+SET instrumento = (SELECT precio FROM articulo WHERE id_prod = id limit 1);
+SET resultado = (instrumento / porcentaje);
+RETURN resultado;
+END||
+DELIMITER ;
+
+SELECT marca, modelo, precio, F_descuento (7,5) FROM articulo  WHERE id_prod = 7;
+
+-- FUNCION que retorna el recuento de instrumentos entre dos años segun el modelo. 
+DELIMITER ||
+CREATE FUNCTION F_Instrumentos (T1 INT, T2 INT) RETURNS INT
+DETERMINISTIC
+BEGIN
+DECLARE resultado INT;
+SET resultado = (SELECT count(modelo) FROM articulo WHERE año  BETWEEN T1 AND T2);
+RETURN resultado;
+END||
+DELIMITER ;
+
+SELECT  F_Instrumentos (2000,2010);
+
+-- d ) PROCEDIMIENTOS ALMACENADOS
+-- SP SIMPLE que devuelve recuento de articulos superior a los 800k
+DELIMITER ||
+CREATE PROCEDURE SP_cantidad_articulos800k()
+BEGIN 
+	SELECT COUNT(id_prod) FROM articulo WHERE precio >= 800000;
+END||
+DELIMITER ;
+
+CALL SP_cantidad_articulos800k();
+
+
+-- SP DE ENTRADA que devuelve un resumen de los pedidos por tipo de articulo (bateria, guitarra, etc)
+-- Se invoca colocando el tipo de instrumento del cual se desea saber el resumen. 
+DELIMITER ||
+CREATE PROCEDURE SP_pedidos_instrumento(in palabra varchar (15))
+BEGIN 
+	SELECT p.cod_compra, p.producto, c.nombre, c.apellido, c.instrumento, a.marca, c.ID_ubi
+    FROM pedidos p 
+    JOIN cliente c ON c.usuario = p.cliente
+    JOIN articulo a  ON p.producto = a.id_prod 
+    WHERE a.tipo = palabra;
+END||
+DELIMITER ;
+
+CALL SP_pedidos_instrumento('redoblante');
+DROP procedure SP_pedidos_instrumento;
+
+-- SP DE ENTRADA Y SALIDA que informa el pago total de los pedidos de un mismo usuario
+DELIMITER ||
+CREATE PROCEDURE SP_PagoXUsuario (IN usuario varchar(12), OUT suma INT)
+BEGIN
+SELECT SUM(precio) INTO suma FROM articulo a 
+JOIN pedidos p ON p.producto = a.id_prod 
+WHERE p.cliente = usuario;
+END||
+DELIMITER ;
+
+CALL SP_PagoXUsuario ('cgrinstonk',@suma );
+SELECT @suma;
+
+-- e) TRIGGER
+
+-- TRIGGER que guarda en bitacora  el ID del articulo y su antiguo valor al actualizar el precio. 
+-- Crear tabla
+CREATE TABLE TR_precios_anteriores (
+id_prod INT PRIMARY KEY,
+precio_anterior INT,
+fecha DATETIME
+);
+
+DELIMITER ||
+CREATE TRIGGER precios_upd 
+BEFORE UPDATE ON articulo
+FOR EACH ROW
+BEGIN
+INSERT INTO TR_precios_anteriores(id_prod, precio_anterior, fecha) 
+	VALUES ( old.id_prod, old.precio, NOW());
+END ||
+DELIMITER ;  
+
+-- prueba
+UPDATE articulo SET  precio = 66000 WHERE id_prod = 5;
+SELECT * FROM TR_precios_anteriores;
+
+-- TRIGGER que guarda en BITACORA los instrumentos dañados que deben devolverse
+-- Con informacion del producto y del proveedor a reclamar. 
+
+CREATE TABLE TR_articulos_devolver (
+id_prod INT PRIMARY KEY,
+precio INT,
+id_provd INT,
+estado VARCHAR (40));
+
+DELIMITER ||
+CREATE TRIGGER devolver
+BEFORE DELETE ON articulo
+FOR EACH ROW
+ BEGIN
+INSERT INTO TR_articulos_devolver (id_prod, precio, id_provd, estado) 
+	VALUES ( old.id_prod, old.precio, old.proveedor, old.estado);
+END||
+DELIMITER ; 
+
+-- Prueba:
+DELETE FROM articulo where id_prod = 22;
+DELETE FROM articulo where id_prod = 11;
+SELECT * FROM TR_articulos_devolver;
+
+-- TRIGGER que guarda los pedidos que han finalizado correctamente
+-- Guarda el codigo de compra, el cliente, el producto y la fecha
+
+CREATE TABLE TR_pedidos_finalizados (
+codigo_compra INT,
+cliente varchar(40) ,
+producto int,
+fecha date);
+
+DELIMITER ||
+CREATE TRIGGER TR_ped_finalizados
+BEFORE DELETE ON pedidos
+FOR EACH ROW
+ BEGIN
+INSERT INTO TR_pedidos_finalizados (codigo_compra,cliente, producto, fecha) 
+	VALUES ( old.cod_compra,old.cliente, old.producto, now());
+END||
+DELIMITER ; 
+ 
+ -- prueba:
+DELETE FROM pedidos WHERE cod_compra = 25;
+DELETE FROM pedidos WHERE cod_compra = 1;
+SELECT * FROM TR_pedidos_finalizados;
+SELECT * FROM PEDIDOS;

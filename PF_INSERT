@@ -1,0 +1,187 @@
+-- PASO 2: INSERT DE DATOS - SEGUIR LOS INCISOS EN ORDEN
+
+-- a) INSERT ubicacion:
+
+INSERT INTO ubicacion VALUES 
+('BA_ma', 'Buenos Aires','Martinez', 1640),
+('SF_sf', 'Santa Fe','Santa Fe', 3000),
+('SF_ro', 'Santa Fe','Rosario', 2000),
+('CABA_sn', 'CABA','San Nicolas', 1004),
+('CABA_pa', 'CABA','Palermo', 1414),
+('CB_co', 'Cordoba','Cordoba', 5000),
+('BA_cnsz', 'Buenos Aires','Coronel Suarez', 7540),
+('BA_ln', 'Buenos Aires','Lanus', 1824),
+('ER_pna', 'Entre Rios','Parana', 3100),
+('MZA_mza', 'Mendoza','Mendoza', 5500),
+('SF_rfa', 'Santa Fe','Rafaela', 2300),
+('SF_stm', 'Santa Fe','Santo Tome', 3016),
+('BA_bb', 'Buenos Aires', 'Bahia Blanca', 8000),
+('BA_mdp', 'Buenos Aires', 'Mar del Plata', 7600),
+('BA_pgm', 'Buenos Aires', 'Pergamino', 2700),
+('CHB_trw', 'Chubut', 'Trelew', 9100),
+('STC_co', 'Santa Cruz', 'Caleta Olivia', 9011),
+('CHC_res', 'Chaco', 'Resistencia', 3500),
+('SJ_sj', 'San Juan', 'San Juan', 5400),
+('CB_vcp', 'Cordoba', 'Villa Carlos Paz', 5152),
+('CB_csq', 'Cordoba', 'Cosquin', 5166);
+
+-- b)Importar cliente.csv (ver drive adjuntado)
+-- en Workbench: "Navigator" → "Schemas" → Click derecho en "cliente"→ Table Data Import Wizard → Subir "cliente.cvs"
+
+
+-- c) INSERT el restante de datos de CLIENTE via UPDATE...
+
+UPDATE cliente
+SET instrumento = 'Vocalista', domicilio= 'Hernandarias 3042', ID_ubi = 'SF_sf'
+WHERE usuario = 'dspaice0';
+
+UPDATE cliente
+SET instrumento = 'Bajista', domicilio= 'Bartolome Mitre 2115', ID_ubi = 'BA_cnsz'
+WHERE usuario = 'zca1';
+
+UPDATE cliente
+SET instrumento = 'Tecladista', domicilio= 'Av. Ntra Sra del Rosario 2739', ID_ubi = 'SF_ro'
+WHERE usuario = 'ypendlenton2';
+
+UPDATE cliente
+SET instrumento = 'Bajista', domicilio= 'Ignacio Risso 1745', ID_ubi = 'SF_sf'
+WHERE usuario = 'pmanton3';
+
+UPDATE cliente
+SET instrumento = 'Baterista', domicilio= 'Domingo Purita 1406', ID_ubi = 'BA_ln'
+WHERE usuario = 'abonefant4';
+
+UPDATE cliente
+SET instrumento = 'Baterista', domicilio= 'República Dominicana 422', ID_ubi = 'ER_pna'
+WHERE usuario = 'ledensor5';
+
+UPDATE cliente
+SET instrumento = 'Baterista', domicilio= 'Malabia 213', ID_ubi = 'MZA_mza'
+WHERE usuario = 'cdrable6';
+
+UPDATE cliente
+SET instrumento = 'Guitarrista', domicilio= 'Falucho 134', ID_ubi = 'SF_rfa'
+WHERE usuario = 'wturneaux7';
+
+UPDATE cliente
+SET instrumento = 'Tecladista', domicilio= 'Av. Lujan 3942', ID_ubi = 'SF_stm'
+WHERE usuario = 'hspiers8';
+
+UPDATE cliente
+SET instrumento = 'Guitarrista', domicilio= 'Gdor. Tarragona 620', ID_ubi = 'SF_sf'
+WHERE usuario = 'eberens9';
+
+UPDATE cliente
+SET instrumento = 'Baterista', domicilio= '14 de Julio 4315', ID_ubi = 'BA_bb'
+WHERE usuario = 'ehenrota';
+
+UPDATE cliente
+SET instrumento = 'Bajista', domicilio= 'Av. Polonia 1051', ID_ubi = 'BA_lp'
+WHERE usuario = 'sbuttenb';
+
+UPDATE cliente
+SET instrumento = 'Guitarrista', domicilio= 'Alberdi 3043', ID_ubi = 'BA_pgm'
+WHERE usuario = 'icoselyc';
+
+UPDATE cliente
+SET instrumento = 'Guitarrista', domicilio= 'Cangallo 1215', ID_ubi = 'CHB_trw'
+WHERE usuario = 'pmoxleyd';
+
+UPDATE cliente
+SET instrumento = 'Guitarrista', domicilio= 'Ombu 450', ID_ubi = 'STC_co'
+WHERE usuario = 'dcurwene';
+
+UPDATE cliente
+SET instrumento = 'Tecladista', domicilio= 'Guemes 200', ID_ubi = 'CHC_res'
+WHERE usuario = 'dwoodgatef';
+
+UPDATE cliente
+SET instrumento = 'Baterista', domicilio= 'Las Heras Sur 430', ID_ubi = 'SJ_sj'
+WHERE usuario = 'kellickg';
+
+UPDATE cliente
+SET instrumento = 'Vocalista', domicilio= 'Atahualpa 770', ID_ubi = 'CB_vcp'
+WHERE usuario = 'yshoemarkh';
+
+UPDATE cliente
+SET instrumento = 'Baterista', domicilio= 'Catamarca 167', ID_ubi = 'CB_csq'
+WHERE usuario = 'jaxoni';
+
+UPDATE cliente
+SET instrumento = 'Guitarrista', domicilio= 'Luis Agote 2957', ID_ubi = 'CB_co'
+WHERE usuario = 'aeburahj';
+
+UPDATE cliente
+SET instrumento = 'Guitarrista', domicilio= 'Pascual Palma 857', ID_ubi = 'ER_pna'
+WHERE usuario = 'cgrinstonk';
+
+UPDATE cliente
+SET instrumento = 'Bajista', domicilio= 'Candioti 4040', ID_ubi = 'SF_stm'
+WHERE usuario = 'sfriesel';
+
+-- d) INSERT proveedores, delivery, empleado, articulo, empresa_correo:
+
+INSERT INTO proveedores (ID_provd, nombre, domicilio, ID_ubi) VALUES 
+(DEFAULT,"Famusic", "Avenida Santa Fe 2899", "BA_ma"), 
+(DEFAULT,"Domene", "9 de Julio 3098", "SF_sf") ,  
+(DEFAULT,"Audio Rosario", "Rioja 1302", "SF_ro"), 
+(DEFAULT,"AudioImport", "Fryda Schultz de Mantovani 1550", "SF_sf"), 
+(DEFAULT,"PC Studio", "Mendoza 2793", "SF_sf" ), 
+(DEFAULT,"Bairesrocks", "San Martin 473", "CABA_pa"),
+(DEFAULT,"Black Music", "Cnel. Niceto Vega 5647", "CABA_sn"), 
+(DEFAULT,"Olmos Music Cordoba", "Av. Emilio Olmos 201", "CB_co"), 
+(DEFAULT,"Templo del Rock","Av. Emilio Olmos 175", "CB_co"); 
+
+DROP TABLE delivery;
+INSERT INTO delivery VALUES
+(DEFAULT, "Red Hot Chilli Flete","3424874871", "Ford F-100", "SF_sf" ),
+(DEFAULT, "Flete Dani", "3424474016", "Ford F-100", "SF_sf" ),
+(DEFAULT, "Los Compadres", "3424454986", "Ford F-100", "SF_stm" ),
+(DEFAULT, "Las 4 Vias", "3424066137", "Ford F-100", "SF_sf"),
+(DEFAULT, "Fletepuntual", "3435115377", "Peugeot 504 Pick-Up", "ER_pna"),
+(DEFAULT, "Transflete", "3434505036", "Renault Furgon", "ER_pna");
+
+INSERT INTO empresa_correo VALUES
+(DEFAULT, "Correo Argentino","info@correoargentino.com.ar", "https://www.correoargentino.com.ar","SF_sf"),
+(DEFAULT, "SER PACK ENCOMIENDA", "parana@serpaq.com", "https://www.serpaq.com","ER_pna" ),
+(DEFAULT, "Transporte Pedrito", "santafe@transportepedrito.com.ar", "https://www.transportepedrito.com.ar","SF_sf" ),
+(DEFAULT, "Bus Pack", "atencionalcliente@buspack.com.ar", "https://www.buspack.com.ar", "SF_sf");
+
+INSERT INTO empleado VALUES
+(DEFAULT, "Cristian", "Jacquier", "Hombre", "Tarde", "3426275067"),
+(DEFAULT, "Sofia", "Jacquier", "Mujer", "Mañana", "3424634234"),
+(DEFAULT, "Andres", "Revi", "Hombre", "Noche", "3425196429");
+
+INSERT INTO articulo VALUES 
+(DEFAULT, 'Instanbul', 'Mehmet', 2006, 'Platillo', 'Nuevo', 565000, 1),
+(DEFAULT, 'Yamaha', 'Custom', 2014, 'Redoblante', 'Nuevo', 1174500, 4),
+(DEFAULT, 'Zildjian', 'Avedis', 2010, 'Platillo', 'Nuevo', 740000, 7),
+(DEFAULT, 'Fender', 'Stratocaster', 2010, 'Guitarra', 'Nuevo', 3197918, 8),
+(DEFAULT, 'Fender', 'Telecaster', 2006, 'Guitarra', 'Nuevo', 565000, 9),
+(DEFAULT, 'Epiphone', 'Les Paul', 1873, 'Guitarra', 'Usado', 1500000, 2),
+(DEFAULT, 'Gibson', 'SG', 2011, 'Guitarra', 'Usado', 2688000, 3),
+(DEFAULT, 'Yamaha', 'PSR', 2015, 'Teclado', 'Nuevo', 565000, 6),
+(DEFAULT, 'Zildjian', 'K', 2023, 'Platillo', 'Nuevo', 769000, 5),
+(DEFAULT, 'Meinl', 'Byzance', 2015, 'Platillo', 'Usado', 205000, 2),
+(DEFAULT, 'Gretsch', 'Range', 2018, 'Redoblante', 'Dañado', 790000, 7),
+(DEFAULT, 'Ibanez', 'GSR205', 2018, 'Bajo', 'Nuevo', 713000, 8),
+(DEFAULT, 'Ibanez', 'GSR200', 2006, 'Bajo', 'Nuevo', 777400, 8),
+(DEFAULT, 'Yamaha', 'TRBX 304', 2020, 'Bajo', 'Nuevo', 1079767, 4),
+(DEFAULT, 'Samson', 'MK10', 2019, 'Soporte', 'Nuevo', 46499, 4),
+(DEFAULT, 'Yamaha', 'PSR', 2008, 'Teclado', 'Usado', 505000, 7),
+(DEFAULT, 'Korg', 'Pa4x', 2019, 'Teclado', 'Usado', 8613696, 2),
+(DEFAULT, 'Korg', 'Pa300', 2017, 'Teclado', 'Usado', 1500000, 7),
+(DEFAULT, 'Tama', 'Starclassic', 2020, 'Bateria', 'Nuevo', 6612212, 2),
+(DEFAULT, 'Pearl', 'Master', 2021, 'Bateria', 'Nuevo', 5338246, 2),
+(DEFAULT, 'Parquer', 'Travel', 2015, 'Bateria', 'Usada', 500000, 2),
+(DEFAULT, 'Turkish', 'Kurak', 2021, 'Platillo', 'Dañado', 520000, 9),
+(DEFAULT, 'Zildjian', 'Avedis', 2022, 'Platillo', 'Usado', 978000, 9),
+(DEFAULT, 'Roger', 'Power Tone', 2020, 'Redoblante', 'Nuevo', 749000, 8),
+(DEFAULT, 'Warwick', 'Corvette', 2018, 'Bajo', 'Dañado', 700000, 2),
+(DEFAULT, 'Texas', 'Stratocaster', 2017, 'Guitarra', 'Dañado', 170000, 9),
+(DEFAULT, 'Mapex', 'Hi-Hat H600', 2014, 'Soporte', 'Dañado', 120000, 5),
+(DEFAULT, 'Aria', 'Les Paul', 1980, 'Guitarra', 'Usado', 2200000, 4)
+;
+
+-- e)Importar pedidos.csv (ver drive adjuntado)
+-- en Workbench: "Navigator" → "Schemas" → Click derecho en "pedidos"→ Table Data Import Wizard → Subir "pedidos.cvs"

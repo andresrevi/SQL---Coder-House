@@ -76,7 +76,7 @@ SET instrumento = 'Baterista', domicilio= '14 de Julio 4315', ID_ubi = 'BA_bb'
 WHERE usuario = 'ehenrota';
 
 UPDATE cliente
-SET instrumento = 'Bajista', domicilio= 'Av. Polonia 1051', ID_ubi = 'BA_lp'
+SET instrumento = 'Bajista', domicilio= 'Av. Polonia 1051', ID_ubi = 'BA_mdp'
 WHERE usuario = 'sbuttenb';
 
 UPDATE cliente

@@ -119,6 +119,94 @@ UPDATE cliente
 SET instrumento = 'Bajista', domicilio= 'Candioti 4040', ID_ubi = 'SF_stm'
 WHERE usuario = 'sfriesel';
 
+UPDATE cliente
+SET instrumento = 'Vocalista', domicilio= 'Hernandarias 3042', ID_ubi = 'SF_sf'
+WHERE usuario = 'dspaice0';
+
+UPDATE cliente
+SET instrumento = 'Bajista', domicilio= 'Bartolome Mitre 2115', ID_ubi = 'BA_cnsz'
+WHERE usuario = 'zca1';
+
+UPDATE cliente
+SET instrumento = 'Tecladista', domicilio= 'Av. Ntra Sra del Rosario 2739', ID_ubi = 'SF_ro'
+WHERE usuario = 'ypendlenton2';
+
+UPDATE cliente
+SET instrumento = 'Bajista', domicilio= 'Ignacio Risso 1745', ID_ubi = 'SF_sf'
+WHERE usuario = 'pmanton3';
+
+UPDATE cliente
+SET instrumento = 'Baterista', domicilio= 'Domingo Purita 1406', ID_ubi = 'BA_ln'
+WHERE usuario = 'abonefant4';
+
+UPDATE cliente
+SET instrumento = 'Baterista', domicilio= 'República Dominicana 422', ID_ubi = 'ER_pna'
+WHERE usuario = 'ledensor5';
+
+UPDATE cliente
+SET instrumento = 'Baterista', domicilio= 'Malabia 213', ID_ubi = 'MZA_mza'
+WHERE usuario = 'cdrable6';
+
+UPDATE cliente
+SET instrumento = 'Guitarrista', domicilio= 'Falucho 134', ID_ubi = 'SF_rfa'
+WHERE usuario = 'wturneaux7';
+
+UPDATE cliente
+SET instrumento = 'Tecladista', domicilio= 'Av. Lujan 3942', ID_ubi = 'SF_stm'
+WHERE usuario = 'hspiers8';
+
+UPDATE cliente
+SET instrumento = 'Guitarrista', domicilio= 'Gdor. Tarragona 620', ID_ubi = 'SF_sf'
+WHERE usuario = 'eberens9';
+
+UPDATE cliente
+SET instrumento = 'Baterista', domicilio= '14 de Julio 4315', ID_ubi = 'BA_bb'
+WHERE usuario = 'ehenrota';
+
+UPDATE cliente
+SET instrumento = 'Bajista', domicilio= 'Av. Polonia 1051', ID_ubi = 'BA_mdp'
+WHERE usuario = 'sbuttenb';
+
+UPDATE cliente
+SET instrumento = 'Guitarrista', domicilio= 'Alberdi 3043', ID_ubi = 'BA_pgm'
+WHERE usuario = 'icoselyc';
+
+UPDATE cliente
+SET instrumento = 'Guitarrista', domicilio= 'Cangallo 1215', ID_ubi = 'CHB_trw'
+WHERE usuario = 'pmoxleyd';
+
+UPDATE cliente
+SET instrumento = 'Guitarrista', domicilio= 'Ombu 450', ID_ubi = 'STC_co'
+WHERE usuario = 'dcurwene';
+
+UPDATE cliente
+SET instrumento = 'Tecladista', domicilio= 'Guemes 200', ID_ubi = 'CHC_res'
+WHERE usuario = 'dwoodgatef';
+
+UPDATE cliente
+SET instrumento = 'Baterista', domicilio= 'Las Heras Sur 430', ID_ubi = 'SJ_sj'
+WHERE usuario = 'kellickg';
+
+UPDATE cliente
+SET instrumento = 'Vocalista', domicilio= 'Atahualpa 770', ID_ubi = 'CB_vcp'
+WHERE usuario = 'yshoemarkh';
+
+UPDATE cliente
+SET instrumento = 'Baterista', domicilio= 'Catamarca 167', ID_ubi = 'CB_csq'
+WHERE usuario = 'jaxoni';
+
+UPDATE cliente
+SET instrumento = 'Guitarrista', domicilio= 'Luis Agote 2957', ID_ubi = 'CB_co'
+WHERE usuario = 'aeburahj';
+
+UPDATE cliente
+SET instrumento = 'Guitarrista', domicilio= 'Pascual Palma 857', ID_ubi = 'ER_pna'
+WHERE usuario = 'cgrinstonk';
+
+UPDATE cliente
+SET instrumento = 'Bajista', domicilio= 'Candioti 4040', ID_ubi = 'SF_stm'
+WHERE usuario = 'sfriesel';
+
 -- d) INSERT proveedores, delivery, empleado, articulo, empresa_correo:
 
 INSERT INTO proveedores (ID_provd, nombre, domicilio, ID_ubi) VALUES 

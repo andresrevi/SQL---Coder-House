@@ -132,7 +132,7 @@ INSERT INTO proveedores (ID_provd, nombre, domicilio, ID_ubi) VALUES
 (DEFAULT,"Olmos Music Cordoba", "Av. Emilio Olmos 201", "CB_co"), 
 (DEFAULT,"Templo del Rock","Av. Emilio Olmos 175", "CB_co"); 
 
-DROP TABLE delivery;
+
 INSERT INTO delivery VALUES
 (DEFAULT, "Red Hot Chilli Flete","3424874871", "Ford F-100", "SF_sf" ),
 (DEFAULT, "Flete Dani", "3424474016", "Ford F-100", "SF_sf" ),
@@ -180,8 +180,7 @@ INSERT INTO articulo VALUES
 (DEFAULT, 'Warwick', 'Corvette', 2018, 'Bajo', 'Dañado', 700000, 2),
 (DEFAULT, 'Texas', 'Stratocaster', 2017, 'Guitarra', 'Dañado', 170000, 9),
 (DEFAULT, 'Mapex', 'Hi-Hat H600', 2014, 'Soporte', 'Dañado', 120000, 5),
-(DEFAULT, 'Aria', 'Les Paul', 1980, 'Guitarra', 'Usado', 2200000, 4)
-;
+(DEFAULT, 'Aria', 'Les Paul', 1980, 'Guitarra', 'Usado', 2200000, 4);
 
 -- e)Importar pedidos.csv (ver drive adjuntado)
 -- en Workbench: "Navigator" → "Schemas" → Click derecho en "pedidos"→ Table Data Import Wizard → Subir "pedidos.cvs"

@@ -150,20 +150,20 @@ CREATE TABLE TR_pedidos_finalizados (
 codigo_compra INT,
 cliente varchar(40) ,
 producto int,
-fecha date);
+fecha date,
+empleado INT);
 
 DELIMITER ||
 CREATE TRIGGER TR_ped_finalizados
 BEFORE DELETE ON pedidos
 FOR EACH ROW
  BEGIN
-INSERT INTO TR_pedidos_finalizados (codigo_compra,cliente, producto, fecha) 
-	VALUES ( old.cod_compra,old.cliente, old.producto, now());
+INSERT INTO TR_pedidos_finalizados (codigo_compra,cliente, producto, fecha,empleado) 
+	VALUES ( old.cod_compra,old.cliente, old.producto, now(), old.empleado);
 END||
 DELIMITER ; 
  
  -- prueba:
-DELETE FROM pedidos WHERE cod_compra = 25;
-DELETE FROM pedidos WHERE cod_compra = 1;
+DELETE FROM pedidos WHERE cod_compra = 23;
+DELETE FROM pedidos WHERE cod_compra = 24;
 SELECT * FROM TR_pedidos_finalizados;
-SELECT * FROM PEDIDOS;

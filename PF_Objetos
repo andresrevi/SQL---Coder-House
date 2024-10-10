@@ -140,7 +140,7 @@ DELIMITER ;
 
 -- Prueba:
 DELETE FROM articulo where id_prod = 22;
-DELETE FROM articulo where id_prod = 11;
+DELETE FROM articulo where id_prod = 26;
 SELECT * FROM TR_articulos_devolver;
 
 -- TRIGGER que guarda los pedidos que han finalizado correctamente
